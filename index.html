@@ -1,436 +1,52 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>الأسرار</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap');
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      min-height: 100vh;
-      background: #0a0a0f;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Amiri', serif;
-      overflow-y: auto;
-      overflow-x: hidden;
-      position: relative;
-    }
-
-    /* Stars background */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(ellipse at 20% 50%, rgba(70, 40, 120, 0.15) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 20%, rgba(30, 60, 100, 0.12) 0%, transparent 60%);
-      pointer-events: none;
-    }
-
-    .stars {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .stars span {
-      position: absolute;
-      display: block;
-      width: 2px;
-      height: 2px;
-      background: white;
-      border-radius: 50%;
-      opacity: 0;
-      animation: twinkle var(--d) ease-in-out infinite var(--delay);
-    }
-
-    @keyframes twinkle {
-      0%, 100% { opacity: 0; transform: scale(1); }
-      50% { opacity: var(--max-op); transform: scale(1.4); }
-    }
-
-    .container {
-      position: relative;
-      z-index: 10;
-      width: 90%;
-      max-width: 680px;
-      text-align: center;
-      padding: 2rem;
-      margin: auto;
-    }
-
-    .message-box {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(200, 170, 100, 0.18);
-      border-radius: 18px;
-      padding: 2.8rem 2.2rem 2.2rem;
-      backdrop-filter: blur(10px);
-      box-shadow:
-        0 0 40px rgba(200, 170, 80, 0.07),
-        inset 0 0 30px rgba(255, 255, 255, 0.02);
-      min-height: 140px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.6s ease;
-    }
-
-    .message-box.glow {
-      border-color: rgba(200, 170, 100, 0.45);
-      box-shadow:
-        0 0 60px rgba(200, 160, 60, 0.18),
-        inset 0 0 30px rgba(255, 255, 255, 0.04);
-    }
-
-    .ornament {
-      color: rgba(200, 170, 80, 0.6);
-      font-size: 1.4rem;
-      letter-spacing: 8px;
-      margin-bottom: 1rem;
-      opacity: 0.7;
-    }
-
-    .message-text {
-      color: #e8d8a0;
-      font-size: 1.45rem;
-      line-height: 2.1;
-      font-weight: 400;
-      word-spacing: 4px;
-      text-shadow: 0 0 20px rgba(220, 190, 80, 0.3);
-      white-space: pre-line;
-      animation: fadeIn 1.2s ease forwards;
-    }
-
-    .message-text .highlight {
-      color: #f0c040;
-      font-weight: 700;
-    }
-
-    .final-message {
-      color: #d4e8c0;
-      font-size: 1.35rem;
-      line-height: 2.2;
-      text-shadow: 0 0 25px rgba(160, 220, 100, 0.25);
-    }
-
-    .final-message .special {
-      color: #a8e080;
-      font-size: 1.5rem;
-      display: block;
-      margin: 0.6rem 0;
-    }
-
-    .final-message .closing {
-      color: #f0d090;
-      font-size: 1.2rem;
-      margin-top: 1rem;
-      display: block;
-      font-style: italic;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .divider {
-      width: 120px;
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(200, 170, 80, 0.5), transparent);
-      margin: 1.2rem auto;
-    }
-
-    .input-section {
-      margin-top: 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.8rem;
-      animation: fadeIn 1.5s ease forwards;
-    }
-
-    .input-hint {
-      color: rgba(200, 180, 120, 0.45);
-      font-size: 0.9rem;
-      letter-spacing: 1px;
-      font-style: italic;
-    }
-
-    .input-field {
-      width: 100%;
-      max-width: 420px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(200, 170, 80, 0.25);
-      border-radius: 50px;
-      padding: 0.85rem 1.6rem;
-      color: #e8d8a0;
-      font-family: 'Amiri', serif;
-      font-size: 1.15rem;
-      text-align: center;
-      outline: none;
-      transition: all 0.4s ease;
-      caret-color: #f0c040;
-    }
-
-    .input-field::placeholder {
-      color: rgba(200, 170, 80, 0.3);
-      font-style: italic;
-    }
-
-    .input-field:focus {
-      border-color: rgba(200, 170, 80, 0.6);
-      background: rgba(255, 255, 255, 0.07);
-      box-shadow: 0 0 20px rgba(200, 160, 60, 0.12);
-    }
-
-    .error-msg {
-      color: rgba(220, 100, 80, 0.7);
-      font-size: 0.88rem;
-      min-height: 1.2em;
-      transition: opacity 0.4s;
-    }
-
-    /* Step 3 special layout */
-    .final-container {
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-    }
-
-    .line {
-      opacity: 0;
-      animation: fadeIn 0.8s ease forwards;
-    }
-
-    .line:nth-child(1) { animation-delay: 0.1s; }
-    .line:nth-child(2) { animation-delay: 0.5s; }
-    .line:nth-child(3) { animation-delay: 0.9s; }
-    .line:nth-child(4) { animation-delay: 1.3s; }
-    .line:nth-child(5) { animation-delay: 1.7s; }
-    .line:nth-child(6) { animation-delay: 2.1s; }
-    .line:nth-child(7) { animation-delay: 2.5s; }
-
-    .glow-pulse {
-      animation: glowPulse 3s ease-in-out infinite;
-    }
-
-    @keyframes glowPulse {
-      0%, 100% { text-shadow: 0 0 20px rgba(220, 190, 80, 0.3); }
-      50% { text-shadow: 0 0 35px rgba(220, 190, 80, 0.65), 0 0 60px rgba(200, 150, 40, 0.2); }
-    }
-
-    .hidden { display: none; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzzle Site</title>
 </head>
 <body>
-
-  <!-- Stars -->
-  <div class="stars" id="stars"></div>
-
-  <div class="container">
-
-    <!-- STEP 0: Gate screen -->
-    <div id="step0">
-      <div class="message-box">
-        <div class="ornament">✦ ✦ ✦</div>
-        <p class="message-text glow-pulse">
-          من أنت؟<br><br>من أحضرك؟
-        </p>
-        <div class="divider"></div>
-      </div>
-      <div class="input-section">
-        <span class="input-hint">أثبت هويتك...</span>
-        <input
-          class="input-field"
-          id="input0"
-          type="text"
-          placeholder="اكتب هنا"
-          autocomplete="off"
-          dir="ltr"
-        />
-        <span class="error-msg" id="err0" style="opacity:0">&#x200B;</span>
-      </div>
+    <h1>Welcome to the Puzzle Site</h1>
+    <div id="puzzle-container">
+        <!-- Puzzle content here -->
     </div>
+    <audio id="bgm" src="assets/abandon-ship.mp3" preload="none"></audio>
+    <script>
+        let bgm = document.getElementById('bgm');
 
-    <!-- STEP 1: Initial message -->
-    <div id="step1" class="hidden">
-      <div class="message-box">
-        <div class="ornament">✦ ✦ ✦</div>
-        <p class="message-text glow-pulse">غاب عنك شيء؟<br><br>
-امتلكت الحق ورأيت ما في الأسرار...<br>
-<span style="color:#f0c040; font-size:1.15rem;">YT · روضة التلاوات</span>
-        </p>
-        <div class="divider"></div>
-      </div>
-      <div class="input-section">
-        <span class="input-hint">أدخل ما تعلمته...</span>
-        <input
-          class="input-field"
-          id="input1"
-          type="text"
-          placeholder="اكتب هنا"
-          autocomplete="off"
-          dir="rtl"
-        />
-        <span class="error-msg" id="err1" style="opacity:0">&#x200B;</span>
-      </div>
-    </div>
+        // Function to fade in the background music
+        function fadeIn(element) {
+            element.volume = 0; 
+            element.play();
+            let fadeEffect = setInterval(() => {
+                if (element.volume < 0.1) {
+                    element.volume += 0.01;
+                } else {
+                    clearInterval(fadeEffect);
+                }
+            }, 150);
+        }
 
-    <!-- STEP 2: After first correct answer -->
-    <div id="step2" class="hidden">
-      <div class="message-box glow">
-        <div class="ornament">❖ ❖ ❖</div>
-        <p class="message-text">ضيق الوقت؟ بل أنتَ من يقوم بإنفاقه<br><br>
-          <span style="color:#f5e07a; font-size:1.3rem; line-height:2.4;">
-            ما لا عينٌ رأت<br>ولا أذنٌ سمعت<br>ولا خطرَ على قلبِ بشر
-          </span>
-        </p>
-        <div class="divider"></div>
-      </div>
-      <div class="input-section">
-        <span class="input-hint">ماذا تعرف؟</span>
-        <input
-          class="input-field"
-          id="input2"
-          type="text"
-          placeholder="اكتب هنا"
-          autocomplete="off"
-          dir="rtl"
-        />
-        <span class="error-msg" id="err2" style="opacity:0">&#x200B;</span>
-      </div>
-    </div>
+        // Function to fade out the background music
+        function fadeOut(element) {
+            let fadeEffect = setInterval(() => {
+                if (element.volume > 0) {
+                    element.volume -= 0.01;
+                } else {
+                    element.pause();
+                    clearInterval(fadeEffect);
+                }
+            }, 150);
+        }
 
-    <!-- STEP 3: Final message -->
-    <div id="step3" class="hidden">
-      <div class="message-box glow">
-        <div class="ornament">🌿 🌿 🌿</div>
-        <div class="final-container">
-          <p class="message-text final-message">
-            <span class="line" style="color:#f5e07a; font-size:1.5rem;">عرفتَ ما لديّ ورأيتَ ما حكيتُ لك</span>
-            <br>
-            <span class="line" style="color:rgba(220,200,160,0.7); font-size:1.1rem;">─────────────────</span>
-            <br>
-            <span class="line">ما لي أراكَ منكسراً؟</span>
-            <span class="line">أفقدتَ شيئاً تهواه؟</span>
-            <span class="line">أتعلم ما خُفي عنك؟</span>
-            <br>
-            <span class="line" style="color:#a8e080; font-size:1.4rem; display:block; margin-top:0.5rem;">
-              صبراً... فإنها بقليلٍ<br>وما ينتظرك إلا كثيرٌ — الأبدُ الجميل
-            </span>
-            <br>
-            <span class="line" style="color:#f0d090; font-style:italic; font-size:1.15rem; display:block; margin-top:0.6rem;">
-              أخبر من أحضرك...<br>بأنه سوف يرى ما لم تصدقه عيناه
-            </span>
-          </p>
-        </div>
-        <div class="divider" style="margin-top:1.6rem;"></div>
-      </div>
-    </div>
-
-  </div>
-
-  <script>
-    // Generate stars
-    const starsEl = document.getElementById('stars');
-    for (let i = 0; i < 140; i++) {
-      const s = document.createElement('span');
-      s.style.setProperty('--d', (3 + Math.random() * 7) + 's');
-      s.style.setProperty('--delay', (-Math.random() * 10) + 's');
-      s.style.setProperty('--max-op', (0.2 + Math.random() * 0.65).toFixed(2));
-      s.style.left = Math.random() * 100 + '%';
-      s.style.top = Math.random() * 100 + '%';
-      s.style.width = s.style.height = (1 + Math.random() * 2.5) + 'px';
-      starsEl.appendChild(s);
-    }
-
-    function normalize(str) {
-      return str
-        .trim()
-        .replace(/[\u064B-\u065F\u0670]/g, '')  // remove tashkeel
-        .replace(/[أإآ]/g, 'ا')
-        .replace(/[ىئ]/g, 'ي')
-        .replace(/ة/g, 'ه')
-        .replace(/\s+/g, ' ');
-    }
-
-    function showError(errEl, msg) {
-      errEl.textContent = msg;
-      errEl.style.opacity = '1';
-      setTimeout(() => { errEl.style.opacity = '0'; }, 2200);
-    }
-
-    function transition(hideId, showId) {
-      const hideEl = document.getElementById(hideId);
-      hideEl.style.opacity = '0';
-      hideEl.style.transition = 'opacity 0.5s ease';
-      setTimeout(() => {
-        hideEl.classList.add('hidden');
-        hideEl.style.opacity = '';
-        const showEl = document.getElementById(showId);
-        showEl.classList.remove('hidden');
-        showEl.style.opacity = '0';
-        showEl.style.transition = 'opacity 0.7s ease';
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            showEl.style.opacity = '1';
-          });
+        // Simulated event listeners for puzzle success
+        document.getElementById('input1-success').addEventListener('click', function() {
+            fadeIn(bgm);
         });
-      }, 500);
-    }
 
-    // Input 0 → Step 1
-    document.getElementById('input0').addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') {
-        if (this.value.trim() === 'somevid441') {
-          transition('step0', 'step1');
-          setTimeout(() => document.getElementById('input1').focus(), 700);
-        } else {
-          showError(document.getElementById('err0'), '...');
-          this.value = '';
-        }
-      }
-    });
-
-    // Input 1 → Step 2
-    document.getElementById('input1').addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') {
-        const val = normalize(this.value);
-        const expected = normalize('لقد عرفت ما فعلت');
-        if (val === expected) {
-          transition('step1', 'step2');
-          setTimeout(() => document.getElementById('input2').focus(), 700);
-        } else {
-          showError(document.getElementById('err1'), '...');
-          this.value = '';
-        }
-      }
-    });
-
-    // Input 2 → Step 3
-    document.getElementById('input2').addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') {
-        const val = normalize(this.value);
-        const expected = normalize('الجنة');
-        if (val === expected) {
-          transition('step2', 'step3');
-        } else {
-          showError(document.getElementById('err2'), '...');
-          this.value = '';
-        }
-      }
-    });
-  </script>
+        document.getElementById('step3-reach').addEventListener('click', function() {
+            fadeOut(bgm);
+        });
+    </script>
 </body>
 </html>
