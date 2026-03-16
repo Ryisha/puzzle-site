@@ -4,49 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Puzzle Site</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        /* Add any needed styles here */
+    </style>
 </head>
 <body>
     <h1>Welcome to the Puzzle Site</h1>
-    <div id="puzzle-container">
-        <!-- Puzzle content here -->
-    </div>
-    <audio id="bgm" src="assets/abandon-ship.mp3" preload="none"></audio>
     <script>
-        let bgm = document.getElementById('bgm');
+        let music = new Audio('path_to_your_music_file.mp3');
+        music.volume = 0;
 
-        // Function to fade in the background music
-        function fadeIn(element) {
-            element.volume = 0; 
-            element.play();
-            let fadeEffect = setInterval(() => {
-                if (element.volume < 0.1) {
-                    element.volume += 0.01;
+        function input1Correct() {
+            // Fade in music
+            let fadeInInterval = setInterval(function() {
+                if (music.volume < 0.5) {
+                    music.volume += 0.01;
                 } else {
-                    clearInterval(fadeEffect);
+                    clearInterval(fadeInInterval);
                 }
-            }, 150);
+            }, 100);
+            music.play();
         }
 
-        // Function to fade out the background music
-        function fadeOut(element) {
-            let fadeEffect = setInterval(() => {
-                if (element.volume > 0) {
-                    element.volume -= 0.01;
+        function input2Correct() {
+            // Fade out music
+            let fadeOutInterval = setInterval(function() {
+                if (music.volume > 0) {
+                    music.volume -= 0.01;
                 } else {
-                    element.pause();
-                    clearInterval(fadeEffect);
+                    clearInterval(fadeOutInterval);
+                    music.pause();
                 }
-            }, 150);
+            }, 100);
         }
-
-        // Simulated event listeners for puzzle success
-        document.getElementById('input1-success').addEventListener('click', function() {
-            fadeIn(bgm);
-        });
-
-        document.getElementById('step3-reach').addEventListener('click', function() {
-            fadeOut(bgm);
-        });
     </script>
 </body>
 </html>
