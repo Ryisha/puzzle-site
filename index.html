@@ -1,43 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Puzzle Site</title>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        /* Add any needed styles here */
-    </style>
+    <title>الألغاز</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Welcome to the Puzzle Site</h1>
-    <script>
-        let music = new Audio('path_to_your_music_file.mp3');
-        music.volume = 0;
-
-        function input1Correct() {
-            // Fade in music
-            let fadeInInterval = setInterval(function() {
-                if (music.volume < 0.5) {
-                    music.volume += 0.01;
-                } else {
-                    clearInterval(fadeInInterval);
-                }
-            }, 100);
-            music.play();
-        }
-
-        function input2Correct() {
-            // Fade out music
-            let fadeOutInterval = setInterval(function() {
-                if (music.volume > 0) {
-                    music.volume -= 0.01;
-                } else {
-                    clearInterval(fadeOutInterval);
-                    music.pause();
-                }
-            }, 100);
-        }
-    </script>
+    <h1>الألغاز العربية</h1>
+    <div id="puzzle-container">
+        <!-- محتوى اللغز هنا -->
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
