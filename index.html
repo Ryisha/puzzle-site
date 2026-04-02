@@ -25,7 +25,6 @@
       position: relative;
     }
 
-    /* Stars background */
     body::before {
       content: '';
       position: fixed;
@@ -112,31 +111,11 @@
       animation: fadeIn 1.2s ease forwards;
     }
 
-    .message-text .highlight {
-      color: #f0c040;
-      font-weight: 700;
-    }
-
     .final-message {
       color: #d4e8c0;
       font-size: 1.35rem;
       line-height: 2.2;
       text-shadow: 0 0 25px rgba(160, 220, 100, 0.25);
-    }
-
-    .final-message .special {
-      color: #a8e080;
-      font-size: 1.5rem;
-      display: block;
-      margin: 0.6rem 0;
-    }
-
-    .final-message .closing {
-      color: #f0d090;
-      font-size: 1.2rem;
-      margin-top: 1rem;
-      display: block;
-      font-style: italic;
     }
 
     @keyframes fadeIn {
@@ -165,6 +144,14 @@
       font-size: 0.9rem;
       letter-spacing: 1px;
       font-style: italic;
+    }
+
+    .answer-row {
+      width: 100%;
+      max-width: 460px;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
     }
 
     .input-field {
@@ -201,11 +188,36 @@
       transition: opacity 0.4s;
     }
 
-    /* Step 3 special layout */
-    .final-container {
+    .hint-wrap {
+      width: 100%;
+      max-width: 460px;
       display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
+      align-items: center;
+      justify-content: center;
+      min-height: 1.5rem;
+    }
+
+    .hint-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid rgba(200, 170, 90, 0.6);
+      background: rgba(255, 255, 255, 0.06);
+      color: #f0d090;
+      font-family: 'Amiri', serif;
+      font-size: 1rem;
+      cursor: pointer;
+      line-height: 1;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hint-text {
+      color: rgba(230, 205, 145, 0.86);
+      font-size: 0.9rem;
+      text-align: center;
     }
 
     .line {
@@ -230,64 +242,233 @@
       50% { text-shadow: 0 0 35px rgba(220, 190, 80, 0.65), 0 0 60px rgba(200, 150, 40, 0.2); }
     }
 
+    .audio-controls {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.55rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(8, 8, 14, 0.72);
+      border: 1px solid rgba(200, 170, 90, 0.28);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 18px rgba(180, 140, 40, 0.12);
+      direction: ltr;
+    }
+
+    .audio-btn {
+      border: 1px solid rgba(200, 170, 90, 0.45);
+      background: rgba(255, 255, 255, 0.06);
+      color: #e8d8a0;
+      border-radius: 999px;
+      padding: 0.35rem 0.85rem;
+      font-family: 'Amiri', serif;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .audio-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(200, 170, 90, 0.65);
+    }
+
+    .volume-slider {
+      width: 120px;
+      accent-color: #d8b050;
+      cursor: pointer;
+    }
+
+    .timer-box {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 25;
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      background: rgba(8, 8, 14, 0.8);
+      border: 1px solid rgba(200, 170, 90, 0.35);
+      color: #f0d090;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      box-shadow: 0 0 16px rgba(180, 140, 40, 0.12);
+      direction: ltr;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 30;
+      background: rgba(3, 3, 7, 0.82);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.2rem;
+    }
+
+    .overlay-card {
+      width: min(720px, 94vw);
+      text-align: center;
+      background: rgba(15, 12, 9, 0.92);
+      border: 1px solid rgba(220, 180, 90, 0.34);
+      border-radius: 20px;
+      padding: 1.8rem 1.4rem;
+      box-shadow: 0 0 42px rgba(210, 160, 60, 0.18);
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    .overlay-title {
+      color: #f2de9d;
+      font-size: 1.55rem;
+      line-height: 1.7;
+      text-shadow: 0 0 18px rgba(210, 160, 60, 0.28);
+      white-space: pre-line;
+    }
+
+    .overlay-actions {
+      margin-top: 1.2rem;
+      display: flex;
+      justify-content: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+    }
+
+    .overlay-btn {
+      margin-top: 1.2rem;
+      border: 1px solid rgba(220, 180, 90, 0.54);
+      background: rgba(255, 255, 255, 0.06);
+      color: #f2de9d;
+      border-radius: 999px;
+      padding: 0.5rem 1.3rem;
+      font-family: 'Amiri', serif;
+      font-size: 1.02rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .overlay-btn:hover {
+      background: rgba(255, 255, 255, 0.11);
+      border-color: rgba(220, 180, 90, 0.78);
+    }
+
+    .exit-shake {
+      display: inline-block;
+      color: #ff6b5b;
+      text-shadow: 0 0 12px rgba(255, 70, 60, 0.45);
+      animation: exitShake 0.12s steps(2, end) infinite;
+      font-weight: 700;
+    }
+
+    @keyframes exitShake {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(-1px, 1px) rotate(-0.5deg); }
+      50% { transform: translate(1px, -1px) rotate(0.6deg); }
+      75% { transform: translate(-1px, -1px) rotate(-0.4deg); }
+      100% { transform: translate(0, 0) rotate(0deg); }
+    }
+
+    .zalgo-line {
+      letter-spacing: 1px;
+      animation: zalgoFlicker 0.18s steps(2, end) infinite;
+      color: #ffb0b0;
+      text-shadow: 0 0 8px rgba(255, 70, 70, 0.5);
+    }
+
+    .glitching {
+      animation: boxGlitch 0.12s steps(2, end) infinite;
+    }
+
+    @keyframes zalgoFlicker {
+      0% { transform: translate(0, 0); opacity: 1; }
+      50% { transform: translate(-1px, 1px); opacity: 0.82; }
+      100% { transform: translate(1px, -1px); opacity: 1; }
+    }
+
+    @keyframes boxGlitch {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(-1px, 1px); }
+      50% { transform: translate(1px, -1px); }
+      75% { transform: translate(-1px, -1px); }
+      100% { transform: translate(0, 0); }
+    }
+
     .hidden { display: none; }
+
+    @media (max-width: 640px) {
+      .audio-controls {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+        bottom: 12px;
+      }
+
+      .volume-slider {
+        width: 95px;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <!-- Stars -->
   <div class="stars" id="stars"></div>
 
   <div class="container">
 
-    <!-- STEP 0: Gate screen -->
     <div id="step0">
       <div class="message-box">
         <div class="ornament">✦ ✦ ✦</div>
-        <p class="message-text glow-pulse">
-          من أنت؟<br><br>من أحضرك؟
-        </p>
+        <p class="message-text glow-pulse">من أحضرك؟</p>
         <div class="divider"></div>
       </div>
       <div class="input-section">
         <span class="input-hint">أثبت هويتك...</span>
-        <input
-          class="input-field"
-          id="input0"
-          type="text"
-          placeholder="اكتب هنا"
-          autocomplete="off"
-          dir="ltr"
-        />
+        <div class="answer-row">
+          <input
+            class="input-field"
+            id="input0"
+            type="text"
+            placeholder="اكتب هنا"
+            autocomplete="off"
+            dir="ltr"
+          />
+          <button id="hintBtn0" class="hint-btn hidden" type="button" aria-label="تلميح السؤال الأول">?</button>
+        </div>
         <span class="error-msg" id="err0" style="opacity:0">&#x200B;</span>
+        <div class="hint-wrap"><span id="hintText0" class="hint-text"></span></div>
       </div>
     </div>
 
-    <!-- STEP 1: Initial message -->
     <div id="step1" class="hidden">
       <div class="message-box">
         <div class="ornament">✦ ✦ ✦</div>
         <p class="message-text glow-pulse">غاب عنك شيء؟<br><br>
-امتلكت الحق ورأيت ما في الأسرار...<br>
-<span style="color:#f0c040; font-size:1.15rem;">YT · روضة التلاوات</span>
+      أمتلكت الحق للتحدي وسترى ما في الأسرار...<br>
+      <span style="color:#f0c040; font-size:1.15rem;">أبحث عن روضة التلاوات - YT</span>
         </p>
         <div class="divider"></div>
       </div>
       <div class="input-section">
         <span class="input-hint">أدخل ما تعلمته...</span>
-        <input
-          class="input-field"
-          id="input1"
-          type="text"
-          placeholder="اكتب هنا"
-          autocomplete="off"
-          dir="rtl"
-        />
+        <div class="answer-row">
+          <input
+            class="input-field"
+            id="input1"
+            type="text"
+            placeholder="اكتب هنا"
+            autocomplete="off"
+            dir="rtl"
+          />
+          <button id="hintBtn1" class="hint-btn hidden" type="button" aria-label="تلميح السؤال الثاني">?</button>
+        </div>
         <span class="error-msg" id="err1" style="opacity:0">&#x200B;</span>
+        <div class="hint-wrap"><span id="hintText1" class="hint-text"></span></div>
       </div>
     </div>
 
-    <!-- STEP 2: After first correct answer -->
     <div id="step2" class="hidden">
       <div class="message-box glow">
         <div class="ornament">❖ ❖ ❖</div>
@@ -300,51 +481,214 @@
       </div>
       <div class="input-section">
         <span class="input-hint">ماذا تعرف؟</span>
-        <input
-          class="input-field"
-          id="input2"
-          type="text"
-          placeholder="اكتب هنا"
-          autocomplete="off"
-          dir="rtl"
-        />
+        <div class="answer-row">
+          <input
+            class="input-field"
+            id="input2"
+            type="text"
+            placeholder="اكتب هنا"
+            autocomplete="off"
+            dir="rtl"
+          />
+          <button id="hintBtn2" class="hint-btn hidden" type="button" aria-label="تلميح السؤال الثالث">?</button>
+        </div>
         <span class="error-msg" id="err2" style="opacity:0">&#x200B;</span>
+        <div class="hint-wrap"><span id="hintText2" class="hint-text"></span></div>
       </div>
     </div>
 
-    <!-- STEP 3: Final message -->
     <div id="step3" class="hidden">
       <div class="message-box glow">
-        <div class="ornament">🌿 🌿 🌿</div>
-        <div class="final-container">
-          <p class="message-text final-message">
-            <span class="line" style="color:#f5e07a; font-size:1.5rem;">عرفتَ ما لديّ ورأيتَ ما حكيتُ لك</span>
-            <br>
-            <span class="line" style="color:rgba(220,200,160,0.7); font-size:1.1rem;">─────────────────</span>
-            <br>
-            <span class="line">ما لي أراكَ منكسراً؟</span>
-            <span class="line">أفقدتَ شيئاً تهواه؟</span>
-            <span class="line">أتعلم ما خُفي عنك؟</span>
-            <br>
-            <span class="line" style="color:#a8e080; font-size:1.4rem; display:block; margin-top:0.5rem;">
-              صبراً... فإنها بقليلٍ<br>وما ينتظرك إلا كثيرٌ — الأبدُ الجميل
-            </span>
-            <br>
-            <span class="line" style="color:#f0d090; font-style:italic; font-size:1.15rem; display:block; margin-top:0.6rem;">
-              أخبر من أحضرك...<br>بأنه سوف يرى ما لم تصدقه عيناه
-            </span>
-          </p>
+        <div class="ornament">❖ ❖ ❖</div>
+        <p class="message-text glow-pulse">الصانع يريد ان يسألك سؤالاً<br><br>
+      يا من يقرأ ما صنعت<br><br>
+      ومن تحدى اسئلتي<br><br>
+      ويريد معرفة ما لا يجب<br><br>
+      اخبرني<br><br>
+      مالذي ندمت عليه انت قبل؟</p>
+        <div class="divider"></div>
+      </div>
+      <div class="input-section">
+        <span class="input-hint">اكتب جوابك بصدق...</span>
+        <div class="answer-row">
+          <input class="input-field" id="input3" type="text" placeholder="اكتب هنا" autocomplete="off" dir="ltr" />
+          <button id="hintBtn3" class="hint-btn hidden" type="button" aria-label="تلميح السؤال الرابع">?</button>
         </div>
+        <span class="error-msg" id="err3" style="opacity:0">&#x200B;</span>
+        <div class="hint-wrap"><span id="hintText3" class="hint-text"></span></div>
+      </div>
+    </div>
+
+    <div id="step4" class="hidden">
+      <div class="message-box glow">
+        <div class="ornament">❖ ❖ ❖</div>
+        <p class="message-text">من كفوفٍ قويةٍ تَعرفُ الصبر...<br><br>
+ومن قمحِ الوديانِ التي سقاها المطر...<br><br>
+وُلدت مَهيبةً كالجبال،<br><br>
+تُعجنُ بالنارِ حتى تستوي،<br><br>
+وتُقدّمُ في مدرةٍ تحفظُ ما فيها.<br><br>
+ناعمةٌ كالفجر...<br><br>
+دافئةٌ كالحنين...<br><br>
+وفي قلبِها بحيرةٌ بها من عسل.<br><br>
+ما هي الملكة التي تتربعُ على عرشِ الموائد؟
+        </p>
+        <div class="divider"></div>
+      </div>
+      <div class="input-section">
+        <span class="input-hint">ماذا تعرف؟</span>
+        <div class="answer-row">
+          <input class="input-field" id="input4" type="text" placeholder="اكتب هنا" autocomplete="off" dir="ltr" />
+          <button id="hintBtn4" class="hint-btn hidden" type="button" aria-label="تلميح السؤال الخامس">?</button>
+        </div>
+        <span class="error-msg" id="err4" style="opacity:0">&#x200B;</span>
+        <div class="hint-wrap"><span id="hintText4" class="hint-text"></span></div>
+      </div>
+    </div>
+
+    <div id="step5" class="hidden">
+      <div class="message-box glow">
+        <div class="ornament">❖ ❖ ❖</div>
+        <p class="message-text glow-pulse" id="glitchQuestionText">قبل عامين.... في تارريخ 2024**4<br>
+الصانع قام بمقابلة ار███ ا███ش
+        </p>
+        <p class="message-text hidden" id="glitchQuestionZalgo">
+<span class="zalgo-line">حَاكُوُا له الخُطَطـ أروه الطريـ█ـق لـ████</span><br>
+<span class="zalgo-line">اجتمعوا علـ█ـيه على أن  █████ مَــنْ اخْتَفَــى</span><br>
+<span class="zalgo-line">اَللَّــوْمُ اَصْبَــحَ عَــلَى اَلصَّا██ــعِ</span>
+        </p>
+        <div class="divider"></div>
+      </div>
+    </div>
+
+    <div id="step6" class="hidden">
+      <div class="message-box glow">
+        <div class="ornament">❖ ❖ ❖</div>
+        <p class="message-text glow-pulse">
+          <span class="zalgo-line">قَيْصَــرٍ فِي زَمَــنِ الرُّومَــانِ... تَزَوَّجَ اثْنَتَيْــنِ</span><br>
+          <span class="zalgo-line">وَأُوتِيَ ثَلَاثَ بَنَــاتٍ... وَأَرْبَعَــةَ أَبْنَــاءٍ</span><br>
+          <span class="zalgo-line">لٰكِــنَّ الْحَــرْبَ لَمْ تَرْحَــمْ... فَسَقَطَ الْأَبْنَــاءُ أَجْمَعِيــنَ</span><br>
+          <span class="zalgo-line">فَبَقِيَــتِ الْبَنَــاتُ... وَزِيدَ عَلَيْهِنَّ وَارِثَــتَانِ</span><br>
+          <span class="zalgo-line">خَمْــسٌ هُنَّ... يَحْمِلْــنَ السِّــرَّ وَالْمِفْتَــاحَ</span><br>
+          <span class="zalgo-line">كُلُّ وَاحِدَةٍ تَحْمِــلُ حَرْفًــا... لِفَــكِّ شِفْــرَةِ الْقَيْصَــرِ</span><br>
+          <span class="zalgo-line">وَمَــنْ جَمَعَــهُنَّ... وَأَزَاحَ خَمْسَ خُطُــوَاتٍ</span><br>
+          <span class="zalgo-line">اِنْكَشَفَ لَــهُ السِّــرُّ... وَظَهَــرَ الْجَوَابُ</span>
+          <br><br>
+          <span class="zalgo-line">....زييد يمط حيهجغض ثرثحخو....</span><br>
+          <span class="zalgo-line">حيغحبل حيحسجض نج تشح حيهضب</span>
+        </p>
+        <div class="divider"></div>
+      </div>
+      <div class="input-section">
+        <span class="input-hint">فكّ الشفرة واكتشف السر...</span>
+        <div class="answer-row">
+          <input class="input-field" id="input6" type="text" placeholder="اكتب هنا" autocomplete="off" dir="rtl" />
+          <button id="hintBtn6" class="hint-btn hidden" type="button" aria-label="تلميح اللغز">?</button>
+        </div>
+        <span class="error-msg" id="err6" style="opacity:0">&#x200B;</span>
+        <div class="hint-wrap"><span id="hintText6" class="hint-text"></span></div>
+      </div>
+    </div>
+
+    <div id="step7" class="hidden">
+      <div class="message-box glow">
+        <div class="ornament">❖ ❖ ❖</div>
+        <p class="message-text glow-pulse">The moon is beautiful isn't it...Dehya_441..?</p>
+        <div class="divider"></div>
+      </div>
+      <div class="input-section">
+        <span class="input-hint">Answer with your heart...</span>
+        <div class="answer-row">
+          <input class="input-field" id="input7" type="text" placeholder="Type here" autocomplete="off" dir="ltr" />
+          <button id="hintBtn7" class="hint-btn hidden" type="button" aria-label="Show hint for Japanese question">?</button>
+        </div>
+        <span class="error-msg" id="err7" style="opacity:0">&#x200B;</span>
+        <div class="hint-wrap"><span id="hintText7" class="hint-text"></span></div>
+      </div>
+    </div>
+
+    <div id="step8" class="hidden">
+      <div class="message-box glow">
+        <div class="ornament">❖ ❖ ❖</div>
+        <p class="message-text glow-pulse">
+          في عالمٍ غريب بأشكالٍ أغرب،<br>
+          مكانٌ للبناء والمشاركة مع الأصدقاء،<br>
+          ويحمل آثار أحداثٍ لا تُحصى...<br><br>
+          اليوم يمر هذا العالم باضطرابٍ كبير،<br>
+          انقطاعات مفاجئة، سكوت بين الافراد، متصيدون عن اليمين وعن الشمال.<br>
+          ورغم ذلك... بقيت الارواحٌ نقيةً وسط الفوضى.<br><br>
+          أنت تعرف هذا العالم مسبقًا .<br>
+          ابحث عن الروح النقية هناك،<br>
+          اسمها أسرد في السؤال السابق...<br>
+          وستمنحك الجواب.
+        </p>
+        <div class="divider"></div>
+      </div>
+      <div class="input-section">
+        <span class="input-hint">اكشف ما تريد الروح النقية اخبارك به...</span>
+        <div class="answer-row">
+          <input class="input-field" id="input8" type="text" placeholder="اكتب هنا" autocomplete="off" dir="ltr" />
+          <button id="hintBtn8" class="hint-btn hidden" type="button" aria-label="تلميح سؤال الحساب">?</button>
+        </div>
+        <span class="error-msg" id="err8" style="opacity:0">&#x200B;</span>
+        <div class="hint-wrap"><span id="hintText8" class="hint-text"></span></div>
+      </div>
+    </div>
+
+    <div id="step9" class="hidden">
+      <div class="message-box glow">
+        <div class="ornament">🌿 🌿 🌿</div>
+        <p class="message-text final-message">
+          <span class="line" style="color:#f5e07a; font-size:1.5rem;">عرفتَ ما لديّ وأنهيت ما صنعت</span>
+          <br>
+          <span class="line" style="color:rgba(220,200,160,0.7); font-size:1.1rem;">─────────────────</span>
+          <br>
+          <span class="line">ما لي أراكَ منكسراً؟</span>
+          <span class="line">أفقدتَ شيئاً تهواه؟</span>
+          <span class="line">أتعلم ما خُفي عنك؟</span>
+          <br>
+          <span class="line" style="color:#a8e080; font-size:1.4rem; display:block; margin-top:0.5rem;">
+            صبراً... فإنها بقليلٍ<br>وما ينتظرك إلا كثيرٌ — الأبدُ الجميل
+          </span>
+          <br>
+          <span class="line" style="color:#f0d090; font-style:italic; font-size:1.15rem; display:block; margin-top:0.6rem;">
+            أخبر من أحضرك...<br>بأنك أنهيتَ ما صنعه وعليه ان يعلم...بانها ليست نهايته...
+          </span>
+        </p>
         <div class="divider" style="margin-top:1.6rem;"></div>
       </div>
     </div>
 
   </div>
 
+  <div id="timerBox" class="timer-box hidden">25:00</div>
+
+  <div id="challengeOverlay" class="overlay hidden">
+    <div class="overlay-card">
+      <p id="challengeText" class="overlay-title">أتريد ان ترى؟
+أتريد تحدي ما صنعته؟</p>
+      <div class="overlay-actions">
+        <button id="continueYesBtn" class="overlay-btn" type="button">نعم</button>
+        <button id="continueNoBtn" class="overlay-btn" type="button">لا</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="answerOverlay" class="overlay hidden">
+    <div class="overlay-card">
+      <p id="answerOverlayText" class="overlay-title"></p>
+      <button id="answerOverlayBtn" class="overlay-btn" type="button">استمرار</button>
+    </div>
+  </div>
+
   <audio id="bgMusic" src="music.mp3" loop preload="auto"></audio>
+  <audio id="alertSfx" src="Amber alert Sound Effect.mp3" preload="auto"></audio>
+
+  <div class="audio-controls">
+    <button id="muteBtn" class="audio-btn" type="button">Mute</button>
+    <input id="volumeSlider" class="volume-slider" type="range" min="0" max="1" step="0.01" value="0.55" aria-label="Volume" />
+  </div>
 
   <script>
-    // Generate stars
     const starsEl = document.getElementById('stars');
     for (let i = 0; i < 140; i++) {
       const s = document.createElement('span');
@@ -358,36 +702,173 @@
     }
 
     const bgMusic = document.getElementById('bgMusic');
+    const alertSfx = document.getElementById('alertSfx');
+    const muteBtn = document.getElementById('muteBtn');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const timerBox = document.getElementById('timerBox');
+    const challengeOverlay = document.getElementById('challengeOverlay');
+    const challengeText = document.getElementById('challengeText');
+    const continueYesBtn = document.getElementById('continueYesBtn');
+    const continueNoBtn = document.getElementById('continueNoBtn');
+    const answerOverlay = document.getElementById('answerOverlay');
+    const answerOverlayText = document.getElementById('answerOverlayText');
+    const answerOverlayBtn = document.getElementById('answerOverlayBtn');
+    const glitchQuestionText = document.getElementById('glitchQuestionText');
+    const glitchQuestionZalgo = document.getElementById('glitchQuestionZalgo');
+
+    const defaultHints = [
+      'من احضرك هو صانع المكان',
+      'YT اختصار لمنصة مواقع تواصل اجتماعي...ابحث عنها',
+      'تلميح: هي دار النعيم الأبدي.',
+      '',
+      'تلميح: أكلة شعبية يمنية تُقدَّم في مَدَرَة، ومن أشهر أسمائها: العصيدة.',
+      'تلميح: ابحث عمّا حصل للروح النقية.',
+      'تلميح: استخدم شفرة القيصر بإزاحة 5، والجملة السفلية هي المفتاح.',
+      'Hint: Any answer you type will pass this step.',
+      'تلميح: الروح النقية في R██l█ هي Dehya_441.'
+    ];
+
+    const neutralRegretWords = [
+      'لا شيء', 'مافي', 'ما في', 'عادي', 'كويس', 'تمام', 'الحمد لله', 'ولا شي', 'nothing', 'none'
+    ];
+    const sadRegretWords = [
+      'حزن', 'حزين', 'زعل', 'تعبت', 'تعب', 'اكتئاب', 'وحيد', 'وحده', 'فقدت', 'خسرت', 'بكيت', 'ندمان',
+      'broken', 'sad', 'regret', 'miss', 'lost', 'hurt', 'pain'
+    ];
+    const severeRegretWords = [
+      'وفاة', 'موت', 'توفي', 'انتحار', 'اعتداء', 'عنف', 'كارثة', 'مرض خطير', 'صدمة', 'تحرش', 'خيانة قاسية',
+      'suicide', 'death', 'abuse', 'trauma', 'assault', 'disaster'
+    ];
+
+    const ALERT_BASE_VOLUME = 0.2;
+
     let musicStarted = false;
+    let alertPlaying = false;
+    let remainingSeconds = 30 * 60;
+    let timerInterval = null;
+
+    bgMusic.volume = parseFloat(volumeSlider.value);
+    alertSfx.volume = Math.min(ALERT_BASE_VOLUME, parseFloat(volumeSlider.value));
+
+    function updateAlertVolume() {
+      alertSfx.volume = Math.min(ALERT_BASE_VOLUME, parseFloat(volumeSlider.value));
+    }
+
+    function updateMuteButton() {
+      muteBtn.textContent = bgMusic.muted ? 'Unmute' : 'Mute';
+      alertSfx.muted = bgMusic.muted;
+    }
+
+    function formatTime(totalSeconds) {
+      const mins = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+      const secs = String(totalSeconds % 60).padStart(2, '0');
+      return mins + ':' + secs;
+    }
+
+    function startTimer() {
+      timerBox.classList.remove('hidden');
+      timerBox.textContent = formatTime(remainingSeconds);
+      if (timerInterval) return;
+      timerInterval = setInterval(() => {
+        remainingSeconds = Math.max(0, remainingSeconds - 1);
+        timerBox.textContent = formatTime(remainingSeconds);
+        if (remainingSeconds === 0) {
+          clearInterval(timerInterval);
+        }
+      }, 1000);
+    }
 
     function startBackgroundMusic() {
       if (musicStarted) return;
       musicStarted = true;
-
       bgMusic.currentTime = 0;
-      bgMusic.play().then(() => {
-        console.log('Audio started');
-      }).catch((err) => {
-        console.log('Audio failed:', err);
+      bgMusic.volume = parseFloat(volumeSlider.value);
+      bgMusic.play().catch(() => {
         musicStarted = false;
       });
     }
 
-    function normalizeFirstInput(str) {
-      return str
-        .toLowerCase()
-        .replace(/\s+/g, '')
-        .replace(/\d+/g, '');
+    function fadeOutAndPauseMusic(durationMs) {
+      if (!musicStarted) return;
+      const startVolume = bgMusic.volume;
+      const start = performance.now();
+
+      function tick(now) {
+        const progress = Math.min(1, (now - start) / durationMs);
+        bgMusic.volume = Math.max(0, startVolume * (1 - progress));
+        if (progress < 1) {
+          requestAnimationFrame(tick);
+        } else {
+          bgMusic.pause();
+          bgMusic.volume = parseFloat(volumeSlider.value);
+        }
+      }
+
+      requestAnimationFrame(tick);
     }
 
-    function normalize(str) {
+    function fadeInAndResumeMusic(durationMs) {
+      const targetVolume = parseFloat(volumeSlider.value);
+      bgMusic.volume = 0;
+      bgMusic.play().then(() => {
+        musicStarted = true;
+        const start = performance.now();
+
+        function tick(now) {
+          const progress = Math.min(1, (now - start) / durationMs);
+          bgMusic.volume = targetVolume * progress;
+          if (progress < 1) {
+            requestAnimationFrame(tick);
+          }
+        }
+
+        requestAnimationFrame(tick);
+      }).catch(() => {
+        bgMusic.volume = targetVolume;
+      });
+    }
+
+    function playAlertSfx() {
+      alertSfx.currentTime = 0;
+      updateAlertVolume();
+      alertSfx.play().then(() => {
+        alertPlaying = true;
+      }).catch(() => {
+        alertPlaying = false;
+      });
+    }
+
+    function stopAlertSfx() {
+      if (!alertPlaying && alertSfx.paused) return;
+      alertSfx.pause();
+      alertSfx.currentTime = 0;
+      alertPlaying = false;
+    }
+
+    function closePageSafely() {
+      window.close();
+      setTimeout(() => {
+        window.location.href = 'about:blank';
+      }, 300);
+    }
+
+    function normalizeFirstInput(str) {
+      return str.toLowerCase().replace(/\s+/g, '').replace(/\d+/g, '');
+    }
+
+    function normalizeArabic(str) {
       return str
         .trim()
-        .replace(/[\u064B-\u065F\u0670]/g, '')  // remove tashkeel
+        .replace(/[\u064B-\u065F\u0670]/g, '')
         .replace(/[أإآ]/g, 'ا')
         .replace(/[ىئ]/g, 'ي')
         .replace(/ة/g, 'ه')
-        .replace(/\s+/g, ' ');
+        .replace(/\s+/g, ' ')
+        .toLowerCase();
+    }
+
+    function normalizeEnglishInput(str) {
+      return str.trim().toLowerCase().replace(/\s+/g, ' ');
     }
 
     function showError(errEl, msg) {
@@ -415,47 +896,229 @@
       }, 500);
     }
 
-    // Input 0 → Step 1
+    function revealHintButton(btnId) {
+      const btn = document.getElementById(btnId);
+      if (btn) btn.classList.remove('hidden');
+    }
+
+    function setHint(step, msg) {
+      const el = document.getElementById('hintText' + step);
+      if (el) el.textContent = msg;
+    }
+
+    function registerHintButton(step, msg) {
+      const btn = document.getElementById('hintBtn' + step);
+      if (!btn || !msg) return;
+      btn.addEventListener('click', function() {
+        setHint(step, msg);
+      });
+    }
+
+    function containsAny(text, keywords) {
+      return keywords.some((k) => text.includes(k));
+    }
+
+    function classifyRegretMessage(rawInput) {
+      const val = normalizeArabic(rawInput);
+
+      if (containsAny(val, neutralRegretWords)) {
+        return 'يا حظك';
+      }
+
+      if (containsAny(val, severeRegretWords)) {
+        return 'أشعر بثقل ما مررت به... ما حدث ليس بسيطًا أبدًا.\nوجودك هنا وصمودك حتى الآن قوة بحد ذاتها.\nلا تحمل كل هذا وحدك، اطلب سندًا ممن تثق بهم.';
+      }
+
+      if (containsAny(val, sadRegretWords) || val.length > 0) {
+        return 'أفهمك... وأقدّر صدقك.\nالأيام الصعبة لا تدوم، وأنت أقوى مما تظن.\nخذ نفسًا عميقًا، وما زال في الطريق نور كثير.';
+      }
+
+      return 'يا حظك';
+    }
+
+    function runGlitchQuestionSequence() {
+      const box = document.querySelector('#step5 .message-box');
+      if (!box) {
+        transition('step5', 'step6');
+        setTimeout(() => document.getElementById('input6').focus(), 700);
+        return;
+      }
+
+      glitchQuestionZalgo.classList.add('hidden');
+      glitchQuestionText.classList.remove('hidden');
+
+      setTimeout(() => {
+        fadeOutAndPauseMusic(900);
+        playAlertSfx();
+        box.classList.add('glitching');
+        glitchQuestionZalgo.classList.remove('hidden');
+      }, 1300);
+
+      setTimeout(() => {
+        box.classList.remove('glitching');
+        stopAlertSfx();
+        transition('step5', 'step6');
+        setTimeout(() => {
+          document.getElementById('input6').focus();
+          fadeInAndResumeMusic(1200);
+        }, 700);
+      }, 3700);
+    }
+
+    registerHintButton(0, defaultHints[0]);
+    registerHintButton(1, defaultHints[1]);
+    registerHintButton(2, defaultHints[2]);
+    registerHintButton(4, defaultHints[4]);
+    registerHintButton(6, defaultHints[6]);
+    registerHintButton(7, defaultHints[7]);
+    registerHintButton(8, defaultHints[8]);
+
+    muteBtn.addEventListener('click', function() {
+      bgMusic.muted = !bgMusic.muted;
+      updateMuteButton();
+    });
+
+    volumeSlider.addEventListener('input', function() {
+      const nextVolume = parseFloat(this.value);
+      bgMusic.volume = nextVolume;
+      updateAlertVolume();
+      if (nextVolume === 0) {
+        bgMusic.muted = true;
+      } else if (bgMusic.muted) {
+        bgMusic.muted = false;
+      }
+      updateMuteButton();
+    });
+
+    continueYesBtn.addEventListener('click', function() {
+      challengeOverlay.classList.add('hidden');
+      transition('step0', 'step1');
+      setTimeout(() => document.getElementById('input1').focus(), 700);
+      startTimer();
+    });
+
+    continueNoBtn.addEventListener('click', function() {
+      challengeText.innerHTML = 'لا بأس، فأنت مخير ولست مسير...<span class="exit-shake">غادر</span> الآن';
+      continueYesBtn.classList.add('hidden');
+      continueNoBtn.classList.add('hidden');
+      setTimeout(closePageSafely, 7000);
+    });
+
+    answerOverlayBtn.addEventListener('click', function() {
+      answerOverlay.classList.add('hidden');
+      transition('step3', 'step4');
+      setTimeout(() => document.getElementById('input4').focus(), 700);
+    });
+
+    updateMuteButton();
+
     document.getElementById('input0').addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') {
-        const val = normalizeFirstInput(this.value);
-        if (val === 'somevid') {
-          startBackgroundMusic();
-          transition('step0', 'step1');
-          setTimeout(() => document.getElementById('input1').focus(), 700);
-        } else {
-          showError(document.getElementById('err0'), '...');
-          this.value = '';
-        }
+      if (e.key !== 'Enter') return;
+      const val = normalizeFirstInput(this.value);
+      if (val === 'somevid') {
+        startBackgroundMusic();
+        challengeText.textContent = 'أتريد ان ترى ما حدث؟\nأتريد تحدي ما صنعته؟';
+        continueYesBtn.classList.remove('hidden');
+        continueNoBtn.classList.remove('hidden');
+        challengeOverlay.classList.remove('hidden');
+      } else {
+        showError(document.getElementById('err0'), '...');
+        revealHintButton('hintBtn0');
+        this.value = '';
       }
     });
 
-    // Input 1 → Step 2
     document.getElementById('input1').addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') {
-        const val = normalize(this.value);
-        const expected = normalize('لقد عرفت ما فعلت');
-        if (val === expected) {
-          transition('step1', 'step2');
-          setTimeout(() => document.getElementById('input2').focus(), 700);
-        } else {
-          showError(document.getElementById('err1'), '...');
-          this.value = '';
-        }
+      if (e.key !== 'Enter') return;
+      const val = normalizeArabic(this.value);
+      const expected = normalizeArabic('المعاتب الاخير في هذا القرن');
+      if (val === expected) {
+        transition('step1', 'step2');
+        setTimeout(() => document.getElementById('input2').focus(), 700);
+      } else {
+        showError(document.getElementById('err1'), '...');
+        revealHintButton('hintBtn1');
+        this.value = '';
       }
     });
 
-    // Input 2 → Step 3
     document.getElementById('input2').addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') {
-        const val = normalize(this.value);
-        const expected = normalize('الجنة');
-        if (val === expected) {
-          transition('step2', 'step3');
-        } else {
-          showError(document.getElementById('err2'), '...');
-          this.value = '';
-        }
+      if (e.key !== 'Enter') return;
+      const val = normalizeArabic(this.value);
+      const expected = normalizeArabic('الجنة');
+      if (val === expected) {
+        transition('step2', 'step3');
+        setTimeout(() => document.getElementById('input3').focus(), 700);
+      } else {
+        showError(document.getElementById('err2'), '...');
+        revealHintButton('hintBtn2');
+        this.value = '';
+      }
+    });
+
+    document.getElementById('input3').addEventListener('keydown', function(e) {
+      if (e.key !== 'Enter') return;
+      const val = this.value.trim();
+      if (!val) {
+        showError(document.getElementById('err3'), 'اكتب شيئًا أولاً...');
+        return;
+      }
+      answerOverlayText.textContent = classifyRegretMessage(val);
+      answerOverlay.classList.remove('hidden');
+      answerOverlayBtn.focus();
+    });
+
+    document.getElementById('input4').addEventListener('keydown', function(e) {
+      if (e.key !== 'Enter') return;
+      const val = normalizeArabic(this.value);
+      const validAnswers = [
+        normalizeArabic('العصيدة'),
+        normalizeArabic('العصيد'),
+        normalizeArabic('العصيده')
+      ];
+      if (validAnswers.includes(val)) {
+        transition('step4', 'step5');
+        setTimeout(runGlitchQuestionSequence, 760);
+      } else {
+        showError(document.getElementById('err4'), 'إجابة غير صحيحة...');
+        revealHintButton('hintBtn4');
+        this.value = '';
+      }
+    });
+
+    document.getElementById('input6').addEventListener('keydown', function(e) {
+      if (e.key !== 'Enter') return;
+      const val = normalizeArabic(this.value);
+      const expected = normalizeArabic('الصانع الاخير في هذا القرن');
+      if (val === expected) {
+        transition('step6', 'step7');
+        setTimeout(() => document.getElementById('input7').focus(), 700);
+      } else {
+        showError(document.getElementById('err6'), 'إجابة غير صحيحة...');
+        revealHintButton('hintBtn6');
+        this.value = '';
+      }
+    });
+
+    document.getElementById('input7').addEventListener('keydown', function(e) {
+      if (e.key !== 'Enter') return;
+      transition('step7', 'step8');
+      setTimeout(() => document.getElementById('input8').focus(), 700);
+    });
+
+    document.getElementById('input8').addEventListener('keydown', function(e) {
+      if (e.key !== 'Enter') return;
+      const val = normalizeEnglishInput(this.value);
+      if (val === 'ur final message' || val === 'your final message') {
+        transition('step8', 'step9');
+        fadeOutAndPauseMusic(1300);
+        stopAlertSfx();
+        musicStarted = false;
+        bgMusic.currentTime = 0;
+      } else {
+        showError(document.getElementById('err8'), 'إجابة غير صحيحة...');
+        revealHintButton('hintBtn8');
+        this.value = '';
       }
     });
   </script>
